@@ -1,3 +1,22 @@
+# This is a fork to help reproduce an issue with the customer artifacts feature of Device Farm. 
+
+after making [this method](https://github.com/jamesknowsbest/aws-device-farm-xctest-ui-tests-for-ios-sample-app/blob/master/ADFiOSReferenceAppUITests/AlertsTest.m#L62-L79) to create a file in the application sandbox Documents directory I am unable to export it given the option in the web console
+
+### Local execution's filepath: 
+
+### specify device state page | reference to export the file created during the test: 
+
+
+### Customer artifacts log: 
+```
+Now attempting to pull iOS customer files from Documents/TestFile.txt
+Failed to attach files from the device path: Documents/TestFile.txt
+Now attempting to pull host machine customer files from $WORKING_DIRECTORY
+Failed to attach directory $WORKING_DIRECTORY because it is empty
+No files were attached.
+```
+
+
 # XCTestUI Sample Tests for AWS Device Farm iOS Sample App
 
 This is an XCTest UI test suite that tests some basic functionalities of the AWS Device Farm iOS [sample app](https://github.com/awslabs/aws-device-farm-sample-app-for-ios).
