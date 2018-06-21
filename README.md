@@ -4,10 +4,13 @@ after making [this method](https://github.com/jamesknowsbest/aws-device-farm-xct
 
 ### Local execution's filepath: 
 
+![local execution's path](https://imgur.com/VYdcF4G)
+
 ### specify device state page | reference to export the file created during the test: 
 
+![specify device state page](https://imgur.com/p2FHrcx)
 
-### Customer artifacts log: 
+### Customer artifacts log after executing in Device Farm: 
 ```
 Now attempting to pull iOS customer files from Documents/TestFile.txt
 Failed to attach files from the device path: Documents/TestFile.txt
@@ -15,6 +18,8 @@ Now attempting to pull host machine customer files from $WORKING_DIRECTORY
 Failed to attach directory $WORKING_DIRECTORY because it is empty
 No files were attached.
 ```
+
+### [Info.plist file](https://github.com/jamesknowsbest/aws-device-farm-xctest-ui-tests-for-ios-sample-app/blob/master/ADFiOSReferenceAppUITests/Info.plist): 
 
 
 # XCTestUI Sample Tests for AWS Device Farm iOS Sample App
