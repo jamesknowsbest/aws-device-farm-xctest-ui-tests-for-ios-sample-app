@@ -4,11 +4,11 @@ after making [this method](https://github.com/jamesknowsbest/aws-device-farm-xct
 
 ### Local execution's filepath: 
 
-![local execution's path](https://imgur.com/VYdcF4G)
+![local execution's path](https://i.imgur.com/VYdcF4G.png)
 
 ### specify device state page | reference to export the file created during the test: 
 
-![specify device state page](https://imgur.com/p2FHrcx)
+![specify device state page](https://i.imgur.com/p2FHrcx.png)
 
 ### Customer artifacts log after executing in Device Farm: 
 ```
@@ -21,6 +21,9 @@ No files were attached.
 
 ### [Info.plist file](https://github.com/jamesknowsbest/aws-device-farm-xctest-ui-tests-for-ios-sample-app/blob/master/ADFiOSReferenceAppUITests/Info.plist): 
 
+### Device Farm execution URL: 
+
+`https://us-west-2.console.aws.amazon.com/devicefarm/home?#/projects/05544254-5ed2-4409-ba27-b59fe5d71dd7/runs/b9d127a7-c1f2-470b-9721-77e775a9d6f7/jobs/00000`
 
 # XCTestUI Sample Tests for AWS Device Farm iOS Sample App
 
