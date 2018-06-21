@@ -26,6 +26,8 @@ static NSTimeInterval const TAP_DELAY = 1;
 
 @implementation AlertsTest
 
+static NSString* kFilename = @"TestFile.txt";
+
 - (void)setUp {
     [super setUp];
     
@@ -57,4 +59,22 @@ static NSTimeInterval const TAP_DELAY = 1;
     XCTAssertFalse([[self app].staticTexts[MODAL_MESSAGE] exists]);
 }
 
+- (void)testWritingToFile{
+    //create file contents
+    NSString *data = @"Put this in a file please.";
+    
+    //get documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths lastObject];
+    
+    //create file path
+    NSString *filepath = [documentsDirectory stringByAppendingPathComponent:kFilename];
+    
+    NSLog(@"Filepath: %@", filepath);
+    
+    BOOL success = [data writeToFile:filepath atomically:YES]; //Write the file
+    if (!success) {
+        NSLog(@"Error writing to file");
+    }
+}
 @end
