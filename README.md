@@ -6,6 +6,13 @@ after making [this method](https://github.com/jamesknowsbest/aws-device-farm-xct
 
 ![local execution's path](https://i.imgur.com/VYdcF4G.png)
 
+### file's output after the test executes
+
+```
+cat /Users/$(whoami)/Library/Developer/CoreSimulator/Devices/71D0EC78-7912-4361-B850-C1109751C4A5/data/Containers/Data/Application/D2D54BB6-1E39-4115-9259-091ADD839539/Documents/TestFile.txt
+Put this in a file please.
+```
+
 ### specify device state page | reference to export the file created during the test: 
 
 ![specify device state page](https://i.imgur.com/p2FHrcx.png)
