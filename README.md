@@ -32,6 +32,38 @@ No files were attached.
 
 `https://us-west-2.console.aws.amazon.com/devicefarm/home?#/projects/05544254-5ed2-4409-ba27-b59fe5d71dd7/runs/b9d127a7-c1f2-470b-9721-77e775a9d6f7/jobs/00000`
 
+### [Update]:
+  Initially, the file was created using the tests. This was not going to work because the file existed in the application sandbox of the test app and not the sample app. 
+  
+  I've updated this fork to have the same app create a file in `Documents` directory when the HomePage is loaded. This file is created but it's not able to be exported by Device farm
+
+**Syslog:**
+```
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: 20.000000
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Filepath: /var/mobile/Containers/Data/Application/66B31E85-89BD-47D5-9335-419E835A41A0/Documents/TestFile.txt
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - Documents
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>:   File - Documents/TestFile.txt
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - Library
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - Library/Caches
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - Library/Preferences
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - SystemData
+Jul  7 09:37:10 9902852781 AWSDeviceFarmiOSReferenceApp[358] <Notice>: Directory - tmp
+```
+
+**Customer Artifacts log:**
+```
+Now attempting to pull iOS customer files from Documents/TestFile.txt
+Failed to attach files from the device path: Documents/TestFile.txt
+Now attempting to pull host machine customer files from $WORKING_DIRECTORY
+Failed to attach directory $WORKING_DIRECTORY because it is empty
+No files were attached.
+```
+
+**Run URL:** https://us-west-2.console.aws.amazon.com/devicefarm/home?#/projects/05544254-5ed2-4409-ba27-b59fe5d71dd7/runs/ebfec1a9-4e18-4494-bcf8-8892c756513b/jobs/00000
+
+Why wasn't device farm able to pull this file from the device even though it's in the right directory? 
+
+
 ### Extra data feature failure
 
 After modifiying the application here to log out the file structure, the aatp/data directory is not found with an extra data zip uploaded. 
