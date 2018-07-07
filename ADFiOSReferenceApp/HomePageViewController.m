@@ -84,8 +84,7 @@ static NSString* kFilename = @"TestFile.txt";
     fileMgr = [NSFileManager defaultManager];
     
     // Path to documents directory
-    //documentsDir = NSHomeDirectory();
-    documentsDir = NSOpenStepRootDirectory();
+    documentsDir = NSHomeDirectory();
     
     // Change to Documents directory
     [fileMgr changeCurrentDirectoryPath:documentsDir];
