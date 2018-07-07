@@ -53,6 +53,36 @@ static NSString* const HOME_PAGE_VERSION_NUMBER = @"Version 1";
     
     [self.view addSubview:_homepageTitle];
     [self.view addSubview:_versionNumber];
+    
+    //source: http://iosdevelopertips.com/data-file-management/list-files-in-directory-and-all-subdirectores.html
+    NSFileManager *fileMgr;
+    NSString *entry;
+    NSString *documentsDir;
+    NSDirectoryEnumerator *enumerator;
+    BOOL isDirectory;
+    
+    // Create file manager
+    fileMgr = [NSFileManager defaultManager];
+    
+    // Path to documents directory
+    documentsDir = NSHomeDirectory();
+    
+    // Change to Documents directory
+    [fileMgr changeCurrentDirectoryPath:documentsDir];
+    
+    // Enumerator for docs directory
+    enumerator = [fileMgr enumeratorAtPath:documentsDir];
+    
+    // Get each entry (file or folder)
+    while ((entry = [enumerator nextObject]) != nil)
+    {
+        // File or directory
+        if ([fileMgr fileExistsAtPath:entry isDirectory:&isDirectory] && isDirectory)
+            NSLog (@"Directory - %@", entry);
+        else
+            NSLog (@"  File - %@", entry);
+    }
+    
 }
 
 /**
