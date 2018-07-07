@@ -27,6 +27,7 @@
 
 static NSString* const HOME_PAGE_TITLE = @"AWS Device Farm Sample app";
 static NSString* const HOME_PAGE_VERSION_NUMBER = @"Version 1";
+static NSString* kFilename = @"TestFile.txt";
 
 @implementation HomePageViewController
 
@@ -54,6 +55,24 @@ static NSString* const HOME_PAGE_VERSION_NUMBER = @"Version 1";
     [self.view addSubview:_homepageTitle];
     [self.view addSubview:_versionNumber];
     
+    //create file to export
+    //create file contents
+    NSString *data = @"Put this in a file please.";
+    
+    //get documents directory
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths lastObject];
+    
+    //create file path
+    NSString *filepath = [documentsDirectory stringByAppendingPathComponent:kFilename];
+    
+    NSLog(@"Filepath: %@", filepath);
+    
+    BOOL success = [data writeToFile:filepath atomically:YES]; //Write the file
+    if (!success) {
+        NSLog(@"Error writing to file");
+    }
+
     //source: http://iosdevelopertips.com/data-file-management/list-files-in-directory-and-all-subdirectores.html
     NSFileManager *fileMgr;
     NSString *entry;
@@ -65,7 +84,8 @@ static NSString* const HOME_PAGE_VERSION_NUMBER = @"Version 1";
     fileMgr = [NSFileManager defaultManager];
     
     // Path to documents directory
-    documentsDir = NSHomeDirectory();
+    //documentsDir = NSHomeDirectory();
+    documentsDir = NSOpenStepRootDirectory();
     
     // Change to Documents directory
     [fileMgr changeCurrentDirectoryPath:documentsDir];
@@ -82,6 +102,8 @@ static NSString* const HOME_PAGE_VERSION_NUMBER = @"Version 1";
         else
             NSLog (@"  File - %@", entry);
     }
+    
+    
     
 }
 
