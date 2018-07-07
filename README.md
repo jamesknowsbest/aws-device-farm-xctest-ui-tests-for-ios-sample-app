@@ -32,6 +32,59 @@ No files were attached.
 
 `https://us-west-2.console.aws.amazon.com/devicefarm/home?#/projects/05544254-5ed2-4409-ba27-b59fe5d71dd7/runs/b9d127a7-c1f2-470b-9721-77e775a9d6f7/jobs/00000`
 
+### Extra data feature failure
+
+After modifiying the application here to log out the file structure, the aatp/data directory is not found with an extra data zip uploaded. 
+
+**URL:** https://us-west-2.console.aws.amazon.com/devicefarm/home?#/projects/653bfd19-f142-4e28-86b6-663aedce5026/runs/dc5e8da8-78ce-4af0-bb38-4b0208f0db43/jobs/00000
+
+**Syslog statements:**
+```
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: 20.000000
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: Directory - Documents
+Jul  6 19:35:33 9902855732 kernel(Sandbox)[0] <Notice>: SandboxViolation: AWSDeviceFarmiOS(301) deny(1) file-read-metadata /private/var/mobile/Containers/Data/Application/F84662DA-CEA4-4FBF-BCB4-5941A7B99FE3/.com.apple.mobile_container_manager.metadata.plist
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: Directory - Library
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: Directory - Library/Caches
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: Directory - Library/Preferences
+Jul  6 19:35:33 9902855732 AWSDeviceFarmiOSReferenceApp[301] <Notice>: Directory - tmp
+```
+
+**Code being used to reference the files:** https://github.com/jamesknowsbest/aws-device-farm-xctest-ui-tests-for-ios-sample-app/blob/master/ADFiOSReferenceApp/HomePageViewController.m#L57-L84
+
+```
+//source: http://iosdevelopertips.com/data-file-management/list-files-in-directory-and-all-subdirectores.html
+    NSFileManager *fileMgr;
+    NSString *entry;
+    NSString *documentsDir;
+    NSDirectoryEnumerator *enumerator;
+    BOOL isDirectory;
+    
+    // Create file manager
+    fileMgr = [NSFileManager defaultManager];
+    
+    // Path to documents directory
+    documentsDir = NSHomeDirectory();
+    
+    // Change to Documents directory
+    [fileMgr changeCurrentDirectoryPath:documentsDir];
+    
+    // Enumerator for docs directory
+    enumerator = [fileMgr enumeratorAtPath:documentsDir];
+    
+    // Get each entry (file or folder)
+    while ((entry = [enumerator nextObject]) != nil)
+    {
+        // File or directory
+        if ([fileMgr fileExistsAtPath:entry isDirectory:&isDirectory] && isDirectory)
+            NSLog (@"Directory - %@", entry);
+        else
+            NSLog (@"  File - %@", entry);
+}
+```
+
+How do you access the additional files from the extra data feature? I know they're in the `aatp/data` directory([reference](https://forums.aws.amazon.com/thread.jspa?threadID=252143)) but that doesn't appear to be found using the above code and the application's sandbox home directory. Is there somewhere else to look? 
+
+
 # XCTestUI Sample Tests for AWS Device Farm iOS Sample App
 
 This is an XCTest UI test suite that tests some basic functionalities of the AWS Device Farm iOS [sample app](https://github.com/awslabs/aws-device-farm-sample-app-for-ios).
